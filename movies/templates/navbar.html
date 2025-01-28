@@ -1,0 +1,16 @@
+<nav class="static top-0 left-0 w-full py-3 px-4 bg-gray-800 text-white flex justify-between items-center">
+    <div class="flex items-center gap-2">
+        <a class="font-semibold pe-4 border-e border-gray-600">Movie Box</a>
+        <ul class="text-gray-600 flex items-center gap-2 ps-2">
+            <li class="bg-white rounded-md px-2"><a href="{% url 'movie-list' %}">
+                <i class="bi bi-film me-2"></i>
+                Todos os Filmes
+            </a></li>
+            <li class="bg-white rounded-md px-2"><a href="">
+                <i class="bi bi-plus-square-fill me-2"></i>Adicionar Filme</a></li>
+        </ul>
+    </div>
+    <a href="{% url 'admin:index' %}">
+        <i class="bi bi-people-fill me-2"></i>
+        ADMIN</a>
+</nav>
