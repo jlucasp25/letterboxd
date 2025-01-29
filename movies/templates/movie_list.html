@@ -13,18 +13,18 @@
 <body>
 {% include 'navbar.html' %}
 
-<main>
+<main class="container mt-5">
     <h5>{{ title }}</h5>
-    <form method="GET" action="">
-        <select name="genre">
+    <form class="bg-secondary p-2" method="GET" action="">
+        <select class="form-control" name="genre">
             <option value="">---</option>
             {% for genre in genres %}
                 <option>{{ genre }}</option>
             {% endfor %}
         </select>
-        <button type="submit" class="btn btn-primary">Filter</button>
+    <button type="submit" class="btn btn-success my-2">Filter Movies</button>
     </form>
-    <div class="d-flex flex-row gap-2">
+    <div class="d-flex flex-row gap-2 mt-2">
         {% for object in movies %}
             {% include 'movie_card.html' with movie=object %}
         {% endfor %}
