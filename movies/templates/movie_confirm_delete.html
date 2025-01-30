@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ block.super }} - Delete {{ object }}{% endblock title %}
+
+{% block content %}
+    <div class="card p-2 mt-2">
+        <form method="POST" action="">
+            <p>Tem a certeza que deseja apagar o filme?</p>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Apagar Filme</button>
+        </form>
+
+    </div>
+{% endblock content %}
