@@ -18,11 +18,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from movies.views import IndexView, MovieListView, AnimationMovieListView
+from movies.views import IndexView, MovieListView, AnimationMovieListView, MovieCreateView, MovieUpdateView, \
+    MovieDeleteView, MovieDetailView
 
 urlpatterns = [
     path("xpto/", admin.site.urls),
     path("", IndexView.as_view()),
-    path("movies/", MovieListView.as_view(),name="movie-list"),
-    path("movies-animation/", AnimationMovieListView.as_view(),name="animation-movie-list"),
+    path("movies/", MovieListView.as_view(), name="movie-list"),
+    path("movies-animation/", AnimationMovieListView.as_view(), name="animation-movie-list"),
+    path("movies-create/", MovieCreateView.as_view(), name="movie-create"),
+    path("movies-update/<int:pk>/", MovieUpdateView.as_view(), name="movie-update"),
+    path("movies-delete/<int:pk>/", MovieDeleteView.as_view(), name="movie-delete"),
+    path("movies-detail/<int:pk>/", MovieDetailView.as_view(), name="movie-detail"),
 ]

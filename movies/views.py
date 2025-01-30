@@ -1,4 +1,5 @@
-from django.views.generic import TemplateView, ListView
+from django.urls import reverse, reverse_lazy
+from django.views.generic import TemplateView, ListView, CreateView, UpdateView, DeleteView, DetailView
 
 from movies.models import Movie
 
@@ -41,3 +42,41 @@ class AnimationMovieListView(TitleMixin, ListView):
     template_name = 'movie_list.html'
     context_object_name = 'movies'
     title = "Animation Movies"
+
+
+class MovieCreateView(CreateView):
+    model = Movie
+    fields = ['title', 'year', 'genre']
+    template_name = 'movie_create_update.html'
+    success_url = reverse_lazy("movie-list")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["action"] = "Create Movie"
+        return context
+
+
+class MovieUpdateView(UpdateView):
+    model = Movie
+    fields = ['title', 'year', 'genre']
+    template_name = 'movie_create_update.html'
+    success_url = reverse_lazy("movie-list")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["action"] = "Update Movie"
+        return context
+
+
+class MovieDeleteView(DeleteView):
+    model = Movie
+    success_url = reverse_lazy("movie-list")
+
+
+class MovieDetailView(DetailView):
+    model = Movie
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["detail"] = True
+        return context
