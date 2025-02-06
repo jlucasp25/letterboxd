@@ -16,7 +16,7 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.views.generic import TemplateView
 
 from movies.views import IndexView, MovieListView, AnimationMovieListView, MovieCreateView, MovieUpdateView, \
@@ -33,4 +33,5 @@ urlpatterns = [
     path("movies-detail/<int:pk>/", MovieDetailView.as_view(), name="movie-detail"),
     path("contact/", ContactView.as_view(), name="contact"),
     path("contact-success/", TemplateView.as_view(template_name="contact_success.html"), name="contact-success"),
+    path("api/", include("movies.api.urls")),
 ]
