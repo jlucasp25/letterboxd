@@ -1,6 +1,7 @@
 from django.urls import reverse, reverse_lazy
-from django.views.generic import TemplateView, ListView, CreateView, UpdateView, DeleteView, DetailView
+from django.views.generic import TemplateView, ListView, CreateView, UpdateView, DeleteView, DetailView, FormView
 
+from movies.forms import ContactForm
 from movies.models import Movie
 
 
@@ -80,3 +81,13 @@ class MovieDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context["detail"] = True
         return context
+
+
+class ContactView(FormView):
+    template_name = "contact.html"
+    form_class = ContactForm
+    success_url = reverse_lazy("contact-success")
+
+    def form_valid(self, form):
+        form.send_email()
+        return super().form_valid(form)

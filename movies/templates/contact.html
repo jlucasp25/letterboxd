@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ block.super }} - Contact{% endblock title %}
+{% block extra_head %}
+    <style>
+    .errorlist {
+        background: blue;
+        border-radius: 8px;
+        border: 1px solid red;
+        color: white;
+        list-style: none;
+    }
+    .errorlist.nonfield {
+        background: red;
+        border-radius: 8px;
+        border: 1px solid red;
+        color: white;
+        list-style: none;
+    }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <h5>Contact Us!</h5>
+    <div class="card p-2 mt-2">
+        <form method="POST" action="">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+{% endblock content %}

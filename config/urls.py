@@ -17,9 +17,10 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
+from django.views.generic import TemplateView
 
 from movies.views import IndexView, MovieListView, AnimationMovieListView, MovieCreateView, MovieUpdateView, \
-    MovieDeleteView, MovieDetailView
+    MovieDeleteView, MovieDetailView, ContactView
 
 urlpatterns = [
     path("xpto/", admin.site.urls),
@@ -30,4 +31,6 @@ urlpatterns = [
     path("movies-update/<int:pk>/", MovieUpdateView.as_view(), name="movie-update"),
     path("movies-delete/<int:pk>/", MovieDeleteView.as_view(), name="movie-delete"),
     path("movies-detail/<int:pk>/", MovieDetailView.as_view(), name="movie-detail"),
+    path("contact/", ContactView.as_view(), name="contact"),
+    path("contact-success/", TemplateView.as_view(template_name="contact_success.html"), name="contact-success"),
 ]
