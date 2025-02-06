@@ -1,5 +1,6 @@
 from django.contrib.auth.models import Group, User
 from rest_framework import permissions, viewsets
+from rest_framework.authentication import SessionAuthentication
 from rest_framework.decorators import api_view
 from rest_framework.mixins import ListModelMixin, RetrieveModelMixin
 from rest_framework.response import Response
@@ -8,6 +9,10 @@ from rest_framework.viewsets import GenericViewSet
 from .serializers import GroupSerializer, UserSerializer, MovieSerializer, GenreSerializer
 from movies.models import Movie, Genre
 
+class CsrfExemptSessionAuthentication(SessionAuthentication):
+
+    def enforce_csrf(self, request):
+        return  # To not perform the csrf check previously happening
 
 class UserViewSet(RetrieveModelMixin,ListModelMixin, GenericViewSet):
     """
@@ -30,6 +35,7 @@ class GroupViewSet(viewsets.ModelViewSet):
 class MovieViewSet(viewsets.ModelViewSet):
     queryset = Movie.objects.all().order_by('title')
     serializer_class = MovieSerializer
+    authentication_classes = [CsrfExemptSessionAuthentication]
 
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
@@ -37,6 +43,8 @@ class MovieViewSet(viewsets.ModelViewSet):
             queryset = queryset.filter(genre__name='Comedy')
         serializer = MovieSerializer(queryset, many=True)
         return Response(serializer.data)
+
+
 
 
 class GenreViewSet(viewsets.ReadOnlyModelViewSet):

@@ -17,7 +17,7 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class MovieSerializer(serializers.ModelSerializer):
-    genre = serializers.CharField(source='genre.name')
+    genre = serializers.CharField(source='genre.name',read_only=True)
 
     class Meta:
         model = Movie
@@ -26,4 +26,4 @@ class MovieSerializer(serializers.ModelSerializer):
 class GenreSerializer(serializers.ModelSerializer):
     class Meta:
         model = Genre
-        fields = ['name']
+        fields = ["id",'name']
