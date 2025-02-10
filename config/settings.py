@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     "rest_framework",
     "corsheaders",
     "movies",
+    # "rest_pandas",
     "rest_framework_yaml",
+    'drf_spectacular',
 ]
 
 MIDDLEWARE = [
@@ -124,11 +126,12 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',
-        "rest_pandas.renderers.PandasCSVRenderer",
-        "rest_pandas.renderers.PandasExcelRenderer",
+        # "rest_pandas.renderers.PandasCSVRenderer",
+        # "rest_pandas.renderers.PandasExcelRenderer",
         'rest_framework_xml.renderers.XMLRenderer',
         'rest_framework_yaml.renderers.YAMLRenderer',
     ],
@@ -148,3 +151,11 @@ REST_FRAMEWORK = {
 }
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Your Project API',
+    'DESCRIPTION': 'Your project description',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    # OTHER SETTINGS
+}
